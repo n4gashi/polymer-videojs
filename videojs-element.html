@@ -1,0 +1,190 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Polymer implementation of the video.js HTML `<video>` polyfill
+Example:
+
+    <videojs-element>
+      src here
+    </videojs-element>
+
+@demo
+-->
+<dom-module id="videojs-element">
+
+  <style>
+    :host { display: block; box-sizing: border-box; }
+  </style>
+
+  <template>
+    <content></content>
+    <video id="video-tag" class="video-js vjs-default-skin">
+      <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
+      <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+      <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'videojs-element',
+
+    properties: {
+
+      /**
+       * Sets whether or not the player has controls that the user
+       * can interact with.
+       * Without controls the only way to start the video
+       * playing is with the autoplay attribute or through the API.
+       */
+      controls: {
+        type: Boolean,
+        value: true
+      },
+
+      /**
+       * If autoplay is true, the video will start playing as soon as page is
+       * loaded (without any interaction from the user).
+       *
+       * NOT SUPPORTED BY APPLE iOS DEVICES.
+       *
+       * Apple blocks the autoplay functionality in an effort to protect it's
+       * customers from unwillingly using a lot of their (often expensive)
+       * monthly data plans. A user touch/click is required to start the
+       * video in this case.
+       */
+      autoplay: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The preload attribute informs the browser whether or not the video
+       * data should begin downloading as soon as the video tag is loaded.
+       * The options are `auto`, `metadata`, and `none`.
+       *
+       * `auto`
+       *
+       * Start loading the video immediately (if the browser agrees).
+       * Some mobile devices like iPhones and iPads will not preload the video
+       * in order to protect their users' bandwidth.
+       * This is why the value is called 'auto' and not something more final like 'true'.
+       *
+       * `metadata`
+       *
+       * Load only the meta data of the video, which includes information like
+       * the duration and dimensions of the video.
+       *
+       * `none`
+       *
+       * Don't preload any of the video data. This will wait until the user
+       * clicks play to begin downloading.
+       */
+      preload: {
+        type:String,
+        value: 'auto'
+      },
+
+      /**
+       * Sets the image that displays before the video begins playing. This is
+       * often a frame of the video or a custom title screen. As soon as the
+       * user clicks play the image will go away.
+       */
+      poster: String,
+
+      /**
+       * Sets the image that displays before the video begins playing. This is
+       * often a frame of the video or a custom title screen. As soon as the
+       * user clicks play the image will go away.
+       */
+      loop: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The width attribute sets the display width of the video.
+       */
+      width: Number,
+
+      /**
+       * The height attribute sets the display height of the video.
+       */
+      height: Number,
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+      // `ready` is called after all elements have been configured, but
+      // propagates bottom-up. This element's children are ready, but parents
+      // are not.
+      //
+      // This is the point where you should make modifications to the DOM (when
+      // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+      // `attached` fires once the element and its parents have been inserted
+      // into a document.
+      //
+      // This is a good place to perform any work related to your element's
+      // visual state or active behavior (measuring sizes, beginning animations,
+      // loading resources, etc).
+    },
+
+    detached: function() {
+      // The analog to `attached`, `detached` fires when the element has been
+      // removed from a document.
+      //
+      // Use this to clean up anything you did in `attached`.
+    },
+
+    // Element Behavior
+
+    /**
+     * The `videojs-element-lasers` event is fired whenever `fireLasers` is called.
+     *
+     * @event videojs-element-lasers
+     * @detail {{sound: String}}
+     */
+
+    /**
+     * Sometimes it's just nice to say hi.
+     *
+     * @param {string} greeting A positive greeting.
+     * @return {string} The full greeting.
+     */
+    sayHello: function(greeting) {
+      var response = greeting || 'Hello World!';
+      return 'videojs-element says, ' + response;
+    },
+
+    /**
+     * Attempts to destroy this element's enemies with an any beam of light!
+     *
+     * Or, at least, dispatches an event in the vain hope that someone else will
+     * do the zapping.
+     */
+    fireLasers: function() {
+      this.fire('videojs-element-lasers', {sound: 'Pew pew!'});
+    }
+
+  });
+
+</script>
