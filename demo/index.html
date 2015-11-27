@@ -27,5 +27,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </videojs-element>
 
+    <script>
+      document.querySelector('videojs-element')
+      .addEventListener('player-ready', function (e) {
+        console.log(e);
+        e.detail.player.play();
+      });
+    </script>
+
   </body>
 </html>
