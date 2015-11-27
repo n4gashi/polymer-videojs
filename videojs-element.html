@@ -8,33 +8,51 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
-
+<link rel="stylesheet" href="../video.js/dist/video-js.min.css">
+<script src="../video.js/dist/video.js"></script>
+<script>
+    videojs.options.flash.swf = "../video.js/dist/video-js.swf";
+</script>
 <!--
 Polymer implementation of the video.js HTML `<video>` polyfill
+
 Example:
 
     <videojs-element>
-      src here
+      <source src="video.mp4" type="video/mp4" />
+      <source src="video.webm" type="video/webm" />
+      <source src="video.ogv" type="video/ogg" />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider
+        upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">
+          supports HTML5 video
+        </a>
+      </p>
     </videojs-element>
+
+How to fire an event :
+
+    <script>
+      document.querySelector('videojs-element')
+      .addEventListener('player-ready', function (e) {
+        e.detail.player.play();
+      });
+    </script>
 
 @demo
 -->
-<dom-module id="videojs-element">
 
+
+<dom-module id="videojs-element">
   <style>
     :host { display: block; box-sizing: border-box; }
   </style>
-
   <template>
-    <content></content>
-    <video id="video-tag" class="video-js vjs-default-skin">
-      <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-      <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-      <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
-      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    <video id="videotag" class$="{{ class }}">
+      <content></content>
     </video>
   </template>
-
 </dom-module>
 
 <script>
@@ -95,7 +113,7 @@ Example:
        * clicks play to begin downloading.
        */
       preload: {
-        type:String,
+        type: String,
         value: 'auto'
       },
 
@@ -104,7 +122,10 @@ Example:
        * often a frame of the video or a custom title screen. As soon as the
        * user clicks play the image will go away.
        */
-      poster: String,
+      poster: {
+        type: String,
+        value: null
+      },
 
       /**
        * Sets the image that displays before the video begins playing. This is
@@ -137,6 +158,7 @@ Example:
       //
       // This is the point where you should make modifications to the DOM (when
       // necessary), or kick off any processes the element wants to perform.
+
     },
 
     attached: function() {
@@ -146,6 +168,23 @@ Example:
       // This is a good place to perform any work related to your element's
       // visual state or active behavior (measuring sizes, beginning animations,
       // loading resources, etc).
+      var videojsElement = this;
+      videojs(
+        this.$.videotag,
+        {
+          autoplay: this.autoplay,
+          controls: this.controls,
+          height: this.height,
+          loop: this.loop,
+          poster: this.poster,
+          preload: this.preload,
+          width: this.width,
+        },
+        function(){
+          // Callback when videojs finished to initialize itself
+          videojsElement._playerReady(this);
+        }
+      );
     },
 
     detached: function() {
@@ -158,31 +197,18 @@ Example:
     // Element Behavior
 
     /**
-     * The `videojs-element-lasers` event is fired whenever `fireLasers` is called.
+     * Fired whenever `_playerReady` is called.
      *
-     * @event videojs-element-lasers
-     * @detail {{sound: String}}
+     * @event player-ready
+     * @param {Player} player
      */
 
     /**
-     * Sometimes it's just nice to say hi.
-     *
-     * @param {string} greeting A positive greeting.
-     * @return {string} The full greeting.
+     * Fire the ready event to let a custom implementation of videojs.ready()
+     * method.
      */
-    sayHello: function(greeting) {
-      var response = greeting || 'Hello World!';
-      return 'videojs-element says, ' + response;
-    },
-
-    /**
-     * Attempts to destroy this element's enemies with an any beam of light!
-     *
-     * Or, at least, dispatches an event in the vain hope that someone else will
-     * do the zapping.
-     */
-    fireLasers: function() {
-      this.fire('videojs-element-lasers', {sound: 'Pew pew!'});
+    _playerReady: function(player) {
+      this.fire('player-ready', { player: player });
     }
 
   });

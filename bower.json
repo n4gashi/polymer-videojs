@@ -1,7 +1,7 @@
 {
   "name": "videojs-element",
   "version": "1.0.0",
-  "private":true,
+  "private": true,
   "authors": [
     "Eric Martin <eric.iLife.pro@gmail.com>"
   ],
@@ -21,7 +21,8 @@
     "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "Polymer/polymer#^1.0.0",
+    "video.js": "~5.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
