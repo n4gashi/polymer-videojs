@@ -49,7 +49,7 @@ How to fire an event :
     :host { display: block; box-sizing: border-box; }
   </style>
   <template>
-    <video id="videotag" class$="{{ class }}">
+    <video id="videotag" class$="video-js {{player-class}}">
       <content></content>
     </video>
   </template>
@@ -146,6 +146,16 @@ How to fire an event :
        * The height attribute sets the display height of the video.
        */
       height: Number,
+
+      /**
+       * Sets the `class` attribute on the HTML video tag.
+       * The `class` attribute has always `videojs` without specifying it.
+       */
+      playerClass:{
+        type: String,
+        value: 'vjs-default-skin',
+        notify: true
+      }
 
     },
 
