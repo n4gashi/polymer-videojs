@@ -22,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <videojs-element class="video-js vjs-default-skin">
+    <videojs-element player-class="vjs-default-skin">
       <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
       <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
       <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
@@ -67,6 +67,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       test('defines the "width" property', function() {
         assert.equal(myEl.width, undefined);
+      });
+
+      test('defines the "playerClass" property', function() {
+        assert.equal(myEl.playerClass, 'vjs-default-skin');
       });
 
     });
