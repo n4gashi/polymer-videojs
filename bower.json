@@ -1,7 +1,6 @@
 {
   "name": "videojs-element",
   "version": "1.0.0",
-  "private": true,
   "authors": [
     "Eric Martin <eric.iLife.pro@gmail.com>"
   ],
