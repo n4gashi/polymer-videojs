@@ -49,9 +49,16 @@ How to fire an event :
     :host { display: block; box-sizing: border-box; }
   </style>
   <template>
-    <video id="videotag" class$="video-js {{player-class}}">
-      <content></content>
-    </video>
+    <template id="video" is="dom-if" if="{{ isVideo }}">
+      <video id="videotag" class$="video-js {{player-class}}">
+        <content></content>
+      </video>
+    </template>
+    <template id="audio" is="dom-if" if="{{ isAudio }}">
+      <audio id="audiotag" class$="video-js {{player-class}}">
+        <content></content>
+      </audio>
+    </template>
   </template>
 </dom-module>
 
@@ -62,6 +69,32 @@ How to fire an event :
     is: 'videojs-element',
 
     properties: {
+
+      /**
+       * Sets the type of player as videojs can handle video and audio tags.
+       */
+      type: {
+        type: String,
+        value: 'video',
+      },
+
+      /**
+       * Returns if `type` is equal to `video`
+       * @type {Boolean}
+       */
+      isVideo: {
+        type:Boolean,
+        computed:'computeType(type, "video")'
+      },
+
+      /**
+       * Returns if `type` is equal to `video`
+       * @type {Boolean}
+       */
+      isAudio: {
+        type:Boolean,
+        computed:'computeType(type, "audio")'
+      },
 
       /**
        * Sets whether or not the player has controls that the user
@@ -179,8 +212,12 @@ How to fire an event :
       // visual state or active behavior (measuring sizes, beginning animations,
       // loading resources, etc).
       var videojsElement = this;
+      var videojsTag = (this.isVideo) ?
+        Polymer.dom(this.root).querySelector('video#videotag'):
+        Polymer.dom(this.root).querySelector('audio#audiotag');
+
       videojs(
-        this.$.videotag,
+        videojsTag,
         {
           autoplay: this.autoplay,
           controls: this.controls,
@@ -219,6 +256,20 @@ How to fire an event :
      */
     _playerReady: function(player) {
       this.fire('player-ready', { player: player });
+    },
+
+    /**
+     * Returns if video-element type is equal to `type`
+     * @param  {String} type Type to compare with the videojs-element
+     * @return {Boolean}
+     */
+    /*isType: function(type) {
+      console.log(this.type);
+      return true;
+    }*/
+
+    computeType: function(type, value){
+      return (type === value);
     }
 
   });
