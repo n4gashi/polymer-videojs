@@ -216,7 +216,7 @@ How to fire an event :
         Polymer.dom(this.root).querySelector('video#videotag'):
         Polymer.dom(this.root).querySelector('audio#audiotag');
 
-      videojs(
+      var videojsObject = videojs(
         videojsTag,
         {
           autoplay: this.autoplay,
@@ -232,6 +232,10 @@ How to fire an event :
           videojsElement._playerReady(this);
         }
       );
+
+      videojsObject.on('play', function(){ videojsElement._playerPlay(); });
+      videojsObject.on('pause', function(){ videojsElement._playerPause(); });
+      videojsObject.on('ended', function(){ videojsElement._playerEnded(); });
     },
 
     detached: function() {
@@ -250,12 +254,54 @@ How to fire an event :
      * @param {Player} player
      */
 
+   /**
+    * Fired whenever `_playerPlay` is called.
+    *
+    * @event player-play
+    */
+
+    /**
+     * Fired whenever `_playerPause` is called.
+     *
+     * @event player-pause
+     */
+
+   /**
+    * Fired whenever `_playerEnded` is called.
+    *
+    * @event player-ended
+    */
+
     /**
      * Fire the ready event to let a custom implementation of videojs.ready()
      * method.
      */
     _playerReady: function(player) {
       this.fire('player-ready', { player: player });
+    },
+
+    /**
+     * Fire the play event to let a custom implementation of videojs.play()
+     * method.
+     */
+    _playerPlay: function() {
+      this.fire('player-play');
+    },
+
+    /**
+     * Fire the pause event to let a custom implementation of videojs.pause()
+     * method.
+     */
+    _playerPause: function() {
+      this.fire('player-pause');
+    },
+
+    /**
+     * Fire the ended event to let a custom implementation of videojs.ended()
+     * method.
+     */
+    _playerEnded: function() {
+      this.fire('player-ended');
     },
 
     /**
