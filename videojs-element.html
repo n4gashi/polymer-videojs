@@ -10,10 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="stylesheet" href="../video.js/dist/video-js.min.css">
 <script src="../video.js/dist/video.js"></script>
-<script src="../videojs-contrib-media-sources/src/videojs-media-sources.js"></script>
-<script src="https://github.com/videojs/videojs-contrib-hls/releases/download/v1.2.2/videojs.hls.min.js"></script>
+<!--<script src="../videojs-hlsjs/dist/videojs-hlsjs.min.js"></script>-->
+<script src="../videojs-contrib-media-sources/dist/videojs-media-sources.min.js"></script>
+<script src="../videojs-contrib-hls/dist/videojs.hls.min.js"></script>
+<!--<script src="https://github.com/videojs/videojs-contrib-hls/releases/download/v1.2.2/videojs.hls.min.js"></script>-->
 <script>
     videojs.options.flash.swf = "../video.js/dist/video-js.swf";
+    <!--
 </script>
 <!--
 Polymer implementation of the video.js HTML `<video>` polyfill
@@ -227,7 +230,7 @@ How to fire an event :
           loop: this.loop,
           poster: this.poster,
           preload: this.preload,
-          width: this.width,
+          width: this.width
         },
         function(){
           // Callback when videojs finished to initialize itself
