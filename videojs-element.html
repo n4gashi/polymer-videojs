@@ -230,7 +230,8 @@ How to fire an event :
           loop: this.loop,
           poster: this.poster,
           preload: this.preload,
-          width: this.width
+          width: this.width,
+          techOrder: ['hls', 'html5', 'flash'],
         },
         function(){
           // Callback when videojs finished to initialize itself
