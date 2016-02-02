@@ -20,7 +20,7 @@
     "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
+    "polymer": "Polymer/polymer#1.2.3",
     "video.js": "5.1.0",
     "videojs-contrib-media-sources": "2.3.0",
     "videojs-contrib-hls": "1.2.0"
