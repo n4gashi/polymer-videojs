@@ -51,12 +51,12 @@ How to fire an event :
   </style>
   <template>
     <template id="video" is="dom-if" if="{{ isVideo }}">
-      <video id="videotag" class$="video-js {{player-class}}">
+      <video id="videotag{{ uniqueId }}" class$="video-js {{player-class}}">
         <content></content>
       </video>
     </template>
     <template id="audio" is="dom-if" if="{{ isAudio }}">
-      <audio id="audiotag" class$="video-js {{player-class}}">
+      <audio id="audiotag{{ uniqueId }}" class$="video-js {{player-class}}">
         <content></content>
       </audio>
     </template>
@@ -70,6 +70,17 @@ How to fire an event :
     is: 'videojs-element',
 
     properties: {
+
+
+      /**
+       * Returns the "unique" id of the video
+       */
+      uniqueId: {
+        type: Number,
+        value: function(){
+          return Math.floor((Math.random() * 40000) + 10000);
+        }
+      },
 
       /**
        * Sets the type of player as videojs can handle video and audio tags.
@@ -223,8 +234,8 @@ How to fire an event :
       // loading resources, etc).
       var videojsElement = this;
       var videojsTag = (this.isVideo) ?
-        Polymer.dom(this.root).querySelector('video#videotag'):
-        Polymer.dom(this.root).querySelector('audio#audiotag');
+        Polymer.dom(this.root).querySelector('video#videotag'+this.uniqueId):
+        Polymer.dom(this.root).querySelector('audio#audiotag'+this.uniqueId);
 
       var videojsObject = videojs(
         videojsTag,
