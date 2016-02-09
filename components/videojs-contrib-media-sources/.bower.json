@@ -1,0 +1,14 @@
+{
+  "name": "videojs-contrib-media-sources",
+  "homepage": "https://github.com/videojs/videojs-contrib-media-sources",
+  "version": "2.3.0",
+  "_release": "2.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.3.0",
+    "commit": "ef5c6ca5f3708897ce63ef2de01ed1618e3c51ab"
+  },
+  "_source": "git://github.com/videojs/videojs-contrib-media-sources.git",
+  "_target": "2.3.0",
+  "_originalSource": "videojs-contrib-media-sources"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "videojs-element",
+  "authors": [
+    "Eric Martin <eric.iLife.pro@gmail.com>"
+  ],
+  "description": "Implementation of videojs library as an element.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "videojs"
+  ],
+  "main": "videojs-element.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/n4gashi/videojs-element/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.2.3",
+    "video.js": "5.1.0",
+    "videojs-contrib-media-sources": "2.3.0",
+    "videojs-contrib-hls": "1.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "75e2c81e2b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "75e2c81e2baefa624025ed5feae8790e9ab2ca6d"
+  },
+  "_source": "git://github.com/n4gashi/videojs-element.git",
+  "_target": "master",
+  "_originalSource": "n4gashi/videojs-element",
+  "_direct": true
+}
